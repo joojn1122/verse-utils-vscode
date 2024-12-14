@@ -1,4 +1,4 @@
-# 📜 **Verse Utils**
+# <img src="./VersePlus.png" width="50px"> **Verse Utils**
 
 **Verse Utils** is a Visual Studio Code extension that provides helpful utilities for working with Verse files in UEFN (Unreal Editor for Fortnite) projects. This extension aims to streamline common Verse development tasks, making your workflow faster and more efficient.
 
@@ -7,15 +7,16 @@
 ## 🚀 **Features**
 
 ### 1️⃣ **Exclude Non-Verse Files**
-This command helps you filter out files that are not Verse files from your project tree, improving project organization and focus.
+This command helps you filter out folders that are not related to Verse from your project tree, improving project organization and focus.
+**(Works only in Verse workspaces)**
 
-**Command**: `Exclude non Verse files`
+**Command**: `Exclude non Verse folders`
 
 **Usage**:
-- Run `Exclude non Verse files` from the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`).
-- The extension will hide non-Verse files from the project explorer.
+- Run `Exclude non Verse folders` from the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`).
+- The extension will hide non-Verse folders from the project explorer.
 
-**The extension will also run this command on startup and on every workspace settings change.**
+#### [!] The extension will also run this command on startup and on every workspace settings change.
 
 ### 2️⃣ **Verse Default Usings**
 Easily insert default "usings" statements for Verse scripts with one command.
@@ -131,7 +132,7 @@ If you want to contribute or modify the extension, you can clone the repository 
 |-----------------------|------------------------------------------|
 | `Verse Default Usings` | Insert default Verse "usings"          |
 | `Verse Enum ToString`  | Generate a function to convert Verse enums to strings |
-| `Exclude non Verse files` | Exclude non-Verse files from the file tree |
+| `Exclude non Verse folders` | Exclude non-Verse folders from the file tree |
 
 ---
 

@@ -1,17 +1,22 @@
 {
-  "name": "verse-utils",
+  "name": "verse-utils-vscode",
   "displayName": "Verse Utils",
   "description": "Some verse utils for UEFN projects",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/joojn1122/verse-utils-vscode"
+  },
   "version": "0.0.2",
   "engines": {
     "vscode": "^1.91.0"
   },
   "categories": [
-    "Other"
+    "Snippets"
   ],
   "activationEvents": [
     "onStartupFinished"
   ],
+  "icon": "./VersePlus.png",
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -25,7 +30,7 @@
       },
       {
         "command": "verse-utils.exlude-nonverse",
-        "title": "Exclude non Verse files"
+        "title": "Exclude non Verse folders"
       }
     ],
     "configuration": {

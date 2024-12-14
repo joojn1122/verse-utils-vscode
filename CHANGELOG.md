@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 
 Verse Enum ToString: Added a command to generate a function for converting Verse enums to strings.
 
-Exclude Non-Verse Files: Added a command to exclude non-Verse files from the file explorer.
+Exclude Non-Verse Folders: Added a command to exclude non-Verse folders from the file explorer.
 
 Configuration Option: Introduced the verse-utils.excludeEmptyFolders setting to allow exclusion of empty folders from the file tree.
 
