@@ -19,7 +19,7 @@ export function parseEnum(text: string) {
     const visiblity = text.includes("<public>") ? "<public>" : "";
     
     return (
-        `(EnumValue: ${name}).ToString${visiblity}():string=\n    case(EnumValue):\n` + 
+        `(EnumValue: ${name}).ToString${visiblity}()<transacts>:string=\n    case(EnumValue):\n` + 
         allWords.map(word => `        ${name}.${word} => "${word}"`).join("\n")
     );
 }

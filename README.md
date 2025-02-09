@@ -18,16 +18,7 @@ This command helps you filter out folders that are not related to Verse from you
 
 #### [!] The extension will also run this command on startup and on every workspace settings change.
 
-### 2️⃣ **Verse Default Usings**
-Easily insert default "usings" statements for Verse scripts with one command.
-
-**Command**: `Verse Default Usings`
-
-**Usage**:
-- Run `Verse Default Usings` from the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`).
-- Default Verse "usings" will be inserted into the active editor.
-
-### 3️⃣ **Verse Enum ToString**
+### 2️⃣ **Verse Enum ToString**
 Generate a function to convert Verse enums into string representations, since Verse doesn't support enum-to-string conversion by default.
 
 **Command**: `Verse Enum ToString`
@@ -45,8 +36,8 @@ action_type := enum:
     Middle
 
 # Generated Function
-(EnumValue: action_type).ToString():string=
-  case(action):
+(EnumValue: action_type).ToString()<transacts>:string=
+  case(EnumValue):
     action_type.Left => "Left"
     action_type.Right => "Right"
     action_type.Middle => "Middle"
@@ -87,7 +78,7 @@ The extension provides customization options in your **settings.json** file. To 
 1. Open any Verse file in Visual Studio Code.
 2. Open the **Command Palette** (`Ctrl+Shift+P` or `Cmd+Shift+P`).
 3. Search for the commands listed below and execute them as needed:
-   - `Verse Default Usings`
+   - `Exclude non Verse folders`
    - `Verse Enum ToString`
 
 ---
@@ -130,7 +121,6 @@ If you want to contribute or modify the extension, you can clone the repository 
 
 | **Command**            | **Description**                         |
 |-----------------------|------------------------------------------|
-| `Verse Default Usings` | Insert default Verse "usings"          |
 | `Verse Enum ToString`  | Generate a function to convert Verse enums to strings |
 | `Exclude non Verse folders` | Exclude non-Verse folders from the file tree |
 

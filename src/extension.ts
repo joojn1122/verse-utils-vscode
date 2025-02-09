@@ -13,41 +13,7 @@ function cmd(context: vscode.ExtensionContext, name: string, callback: () => voi
     return cmd;
 }
 
-function insertVerseUsings() {
-    const editor = vscode.window.activeTextEditor;
-    
-    if (!editor) {
-        return;
-    }
-    
-    editor.edit(editBuilder => {
-        const usings = [
-            "/Fortnite.com/Devices",
-            "/Verse.org/Simulation",
-            "/Verse.org/Colors",
-            "/Fortnite.com/Teams",
-            "/Fortnite.com/Game",
-            "/Fortnite.com/Characters",
-            "/UnrealEngine.com/Temporary/Diagnostics",
-            "/UnrealEngine.com/Temporary/UI",
-            "/UnrealEngine.com/Temporary/SpatialMath",
-            "/Fortnite.com/UI",
-            "/Verse.org/Assets",
-            "/Verse.org/Random",
-            "/Fortnite.com/FortPlayerUtilities",
-            "/Verse.org/Simulation/Tags",
-            "/Fortnite.com/AI",
-            "/Fortnite.com/Animation/PlayAnimation"
-        ];
-        
-        const usingsText = usings.map(u => `using { ${u} }\n`).join('')
-        
-        editBuilder.insert(new vscode.Position(0, 0), usingsText);
-    });
-}
-
 export function activate(context: vscode.ExtensionContext) {
-    cmd(context, 'verse-utils.verse-usings', insertVerseUsings);
     cmd(context, 'verse-utils.enum-str', generateEnum);
     cmd(context, 'verse-utils.exlude-nonverse', checkAndExcludeFolders);
     
@@ -65,6 +31,30 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(disposable);
     
     checkAndExcludeFolders();
+}
+
+async function* walk(dir: string): AsyncGenerator<string> {
+    for await (const d of await fs.promises.opendir(dir)) {
+        const entry = path.join(dir, d.name);
+        if (d.isDirectory()) yield* walk(entry);
+        else if (d.isFile()) yield entry;
+    }
+}
+
+async function shouldExcludeFolder(folderPath: string, excludeEmptyFolders: boolean) {
+    const files = fs.readdirSync(folderPath);
+
+    if(excludeEmptyFolders && files.length == 0) {
+        return true;
+    }
+
+    for await (const file of walk(folderPath)) {
+        if(file.endsWith('.verse')) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 async function checkAndExcludeFolders() {
@@ -86,13 +76,8 @@ async function checkAndExcludeFolders() {
             const filePath = path.join(rootPath, file);
             
             if (fs.statSync(filePath).isDirectory()) {
-                const files = fs.readdirSync(filePath);
-                
                 // Exclude folder
-                if(
-                    (excludeEmptyFolders && files.length === 0) ||
-                    (files.length > 0 && !files.some(f => f.endsWith('.verse')))
-                ) {
+                if(await shouldExcludeFolder(filePath, excludeEmptyFolders)) {
                     foldersToExclude[file] = true;
                 }
                 else {
